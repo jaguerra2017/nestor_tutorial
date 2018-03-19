@@ -45,20 +45,44 @@ exports.book_create_post = function(req, res) {
 
 // Display book delete form on GET.
 exports.book_delete_get = function(req, res) {
-  res.send('NOT IMPLEMENTED: Book delete GET');
+  Book.remove({_id:req.params.id},function (err,book) {
+    if(err) return res.status(500).send(err.message);
+    res.status(200).json(book);
+  })
 };
 
 // Handle book delete on POST.
 exports.book_delete_post = function(req, res) {
-  res.send('NOT IMPLEMENTED: Book delete POST');
+  Book.remove({_id:req.params.id},function (err,book) {
+    if(err) return res.status(500).send(err.message);
+    res.status(200).json(book);
+  })
 };
 
 // Display book update form on GET.
 exports.book_update_get = function(req, res) {
-  res.send('NOT IMPLEMENTED: Book update GET');
+  Book.findOneAndUpdate({_id:req.params.id},{
+    title: req.params.title,
+    author: req.params.author,
+    summary: req.params.summary,
+    isbn: req.params.isbn,
+    genre: req.params.genre
+  }, function (err,book) {
+    if(err) return res.status(500).send(err.message);
+    res.status(200).json(book);
+  })
 };
 
 // Handle book update on POST.
 exports.book_update_post = function(req, res) {
-  res.send('NOT IMPLEMENTED: Book update POST');
+  Book.findOneAndUpdate({_id:req.params.id},{
+    title: req.body.title,
+    author: req.body.author,
+    summary: req.body.summary,
+    isbn: req.body.isbn,
+    genre: req.body.genre
+  }, function (err,book) {
+    if(err) return res.status(500).send(err.message);
+    res.status(200).json(book);
+  })
 };
